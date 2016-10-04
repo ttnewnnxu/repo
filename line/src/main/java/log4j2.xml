@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" configDebug="true">
+  <Appenders>
+    <Console name="CONSOLE" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%d{yyyy-MMM-dd HH:mm:ss.SSS}] [%t] [%-5level] %logger{36}.%M() : %L - %msg%n"/>
+    </Console>
+    <RollingFile name="bakuLogFile" 
+        fileName="/Users/steven/aplogs/line_test.log" 
+        filePattern="/Users/steven/aplogs/line_test-%d{yyyy-MM-dd}.log.gz"
+		ignoreExceptions="false">
+		<!--  ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/ -->  
+      	<PatternLayout>
+        	<Pattern>[%d{yyyy-MMM-dd HH:mm:ss.SSS}]  [%t] [%-5level] %logger{36}.%M() : %L - %msg%n</Pattern>
+      	</PatternLayout>
+      	<TimeBasedTriggeringPolicy />
+    </RollingFile>
+    
+  </Appenders>
+  <Loggers>
+  	<logger name="com" level="TRACE" additivity="false">
+  		<AppenderRef ref="CONSOLE"/>
+  		<AppenderRef ref="bakuLogFile"/>
+  	</logger>
+  	<Root level="TRACE">
+      <AppenderRef ref="CONSOLE"/>
+    </Root>
+  </Loggers>
+</log4j:configuration>
